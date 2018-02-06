@@ -1,0 +1,32 @@
+{
+  "name": "bytic/utility",
+  "type": "library",
+  "description": "Php Framework",
+  "homepage": "https://github.com/bytic/utility",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gabriel Solomon",
+      "email": "hello@gabrielsolomon.ro"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Nip\\Utility\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Nip\\Utility\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^7.0",
+    "nesbot/carbon": "^1.22"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.0",
+    "phpunit/phpunit": "^6.2",
+    "mockery/mockery": "^0.9"
+  }
+}
