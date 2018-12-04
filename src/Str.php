@@ -549,7 +549,7 @@ class Str
      * @param bool $strict
      * @return bool
      */
-    function isSerialized($data, $strict = true)
+    public function isSerialized($data, $strict = true)
     {
         // if it isn't a string, it isn't serialized.
         if (!is_string($data)) {
