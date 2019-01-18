@@ -1006,4 +1006,19 @@ class Str
         }
         return false;
     }
+
+    /**
+     * @param $str
+     * @param $first
+     * @param $last
+     * @return string
+     */
+    public static function mask($str, $first = 0, $last = 0)
+    {
+        $len = strlen($str);
+        $toShow = $first + $last;
+        return substr($str, 0, $len <= $toShow ? 0 : $first)
+            . str_repeat("*", $len - ($len <= $toShow ? 0 : $toShow))
+            . substr($str, $len - $last, $len <= $toShow ? 0 : $last);
+    }
 }
