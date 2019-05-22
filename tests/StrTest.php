@@ -15,7 +15,7 @@ class StrTest extends AbstractTest
      * @param $start
      * @param $end
      * @param $masked
-     * @dataProvider maskData()
+     * @dataProvider dataMask()
      */
     public function testMask($data, $start, $end, $masked)
     {
@@ -25,13 +25,35 @@ class StrTest extends AbstractTest
     /**
      * @return array
      */
-    public function maskData()
+    public function dataMask()
     {
         return [
             ['test', 0, null, '****'],
             ['test', 1, null, 't***'],
             ['foe', 2, 1, '***'],
             ['lorem', 5, false, '*****'],
+        ];
+    }
+
+    /**
+     * @param $name
+     * @param $initials
+     * @dataProvider dataInitials()
+     */
+    public function testInitials($name, $initials)
+    {
+        self::assertSame($initials, Str::initials($name));
+    }
+
+    /**
+     * @return array
+     */
+    public function dataInitials()
+    {
+        return [
+            ['test', 'T.'],
+            ['test test', 'T.T.'],
+            ['test-test', 'T.T.'],
         ];
     }
 }
