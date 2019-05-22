@@ -18,7 +18,7 @@ class Email
             return Str::mask($email, 1);
         }
 
-        list ($username, $domain) = explode("@", $email);
+        list($username, $domain) = explode("@", $email);
 
         $parts[] = Str::mask($username, 1);
         $parts[] = '@';
