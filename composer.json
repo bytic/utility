@@ -13,16 +13,16 @@
   "autoload": {
     "psr-4": {
       "Nip\\Utility\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Nip\\Utility\\Tests\\": "tests/"
     },
     "files": [
       "src/helpers/general.php",
       "src/helpers/input.php"
     ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Nip\\Utility\\Tests\\": "tests/"
+    }
   },
   "require": {
     "php": "^7.0",
