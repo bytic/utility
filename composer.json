@@ -18,7 +18,11 @@
   "autoload-dev": {
     "psr-4": {
       "Nip\\Utility\\Tests\\": "tests/"
-    }
+    },
+    "files": [
+      "src/helpers/general.php",
+      "src/helpers/input.php"
+    ]
   },
   "require": {
     "php": "^7.0",
