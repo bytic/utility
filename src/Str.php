@@ -1038,4 +1038,19 @@ class Str
 
         return implode($separator, $initials) . $separator;
     }
+
+    /**
+     * @param string $string
+     * @param bool $return
+     * @param array $params
+     * @return bool|mixed
+     */
+    public static function isJson(string $string, $return = false, ...$params)
+    {
+        $data = json_decode($string, ...$params);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return false;
+        }
+        return $return ? $data : true;
+    }
 }

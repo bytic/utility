@@ -26,7 +26,8 @@
   },
   "require": {
     "php": "^7.1",
-    "nesbot/carbon": "^1.36"
+    "ext-json": "*",
+    "nesbot/carbon": "^1.36",
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0",

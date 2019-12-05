@@ -56,4 +56,30 @@ class StrTest extends AbstractTest
             ['test-test', 'T.T.'],
         ];
     }
+
+    /**
+     * @dataProvider dataIsJson()
+     * @param $json
+     * @param $return
+     * @param $params
+     * @param $output
+     */
+    public function testIsJson($json, $return, $params, $output)
+    {
+        self::assertSame($output, Str::isJson($json, $return, ...$params));
+    }
+
+    /**
+     * @return array
+     */
+    public function dataIsJson()
+    {
+        return [
+            ['test', null, [], false],
+            [json_encode([1 => 2]), null, [], true],
+            [json_encode([1 => 2]), false, [], true],
+            [json_encode([1 => 2]), '', [], true],
+            [json_encode([1 => 2]), true, [true], [1 => 2]],
+        ];
+    }
 }
