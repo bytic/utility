@@ -253,4 +253,40 @@ class Arr
         $key = is_null($key) || is_array($key) ? $key : explode('.', $key);
         return [$value, $key];
     }
+
+    /**
+     * Push an item onto the beginning of an array.
+     *
+     * @param array $array
+     * @param mixed $value
+     * @param mixed $key
+     * @return array
+     */
+    public static function prepend($array, $value, $key = null)
+    {
+        if (is_null($key)) {
+            array_unshift($array, $value);
+        } else {
+            $array = [$key => $value] + $array;
+        }
+
+        return $array;
+    }
+
+    /**
+     * Get a value from the array, and remove it.
+     *
+     * @param array $array
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    public static function pull(&$array, $key, $default = null)
+    {
+        $value = static::get($array, $key, $default);
+
+        static::forget($array, $key);
+
+        return $value;
+    }
 }
