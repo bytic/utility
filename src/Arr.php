@@ -148,6 +148,25 @@ class Arr
     }
 
     /**
+     * @param $array
+     * @param mixed ...$values
+     * @return mixed
+     */
+    public static function forgetValues(&$array, ...$values)
+    {
+        if (is_array($values[0])) {
+            $values = $values[0];
+        }
+        if ($values) {
+            foreach ($values as $value) {
+                unset($array[array_search($value, $array)]);
+            }
+        }
+
+        return $array;
+    }
+
+    /**
      * Get an item from an array using "dot" notation.
      *
      * @param \ArrayAccess|array $array

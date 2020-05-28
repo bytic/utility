@@ -48,4 +48,10 @@ class ArrTest extends AbstractTest
         $array = Arr::pluck($array, 'developer.name');
         static::assertEquals(['Taylor', 'Abigail'], $array);
     }
+
+    public function test_forgetValues()
+    {
+        $array = ['11', '22', '33'];
+        self::assertSame(['11'], Arr::forgetValues($array, '22', '33'));
+    }
 }
