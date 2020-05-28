@@ -75,7 +75,7 @@ class Url
      * @param $url
      * @return string
      */
-    public function build($url)
+    public static function build($url)
     {
         $scheme = isset($url['scheme']) ? $url['scheme'] . '://' : '';
         $host = isset($url['host']) ? $url['host'] : '';
