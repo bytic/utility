@@ -26,7 +26,8 @@
   },
   "require": {
     "php": "^7.1",
-    "nesbot/carbon": "^1.36"
+    "nesbot/carbon": "^1.36",
+    "ramsey/uuid": "^3.7|^4.0"
   },
   "require-dev": {
     "ext-json": "*",
