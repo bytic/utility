@@ -21,6 +21,7 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "Nip\\Utility\\Tests\\Fixtures\\": "tests/fixtures",
       "Nip\\Utility\\Tests\\": "tests/src"
     }
   },
