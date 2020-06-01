@@ -11,6 +11,12 @@ use Nip\Utility\Tests\Fixtures\ExtendedClass;
  */
 class OopTest extends AbstractTest
 {
+    public function test_basename()
+    {
+        $name = Oop::basename(ExtendedClass::class);
+        self::assertSame('ExtendedClass', $name);
+    }
+
     public function test_uses()
     {
         $traits = Oop::uses(ExtendedClass::class);

@@ -8,6 +8,18 @@ namespace Nip\Utility;
  */
 class Oop
 {
+
+    /**
+     * @param $class
+     * @return string
+     */
+    public static function basename($class)
+    {
+        $class = is_object($class) ? get_class($class) : $class;
+
+        return basename(str_replace('\\', '/', $class));
+    }
+
     /**
      * @param $class
      * @param bool $recursive
