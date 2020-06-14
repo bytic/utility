@@ -1,13 +1,16 @@
 <?php
 
 if (!function_exists('fix_input_quotes')) {
+    /**
+     * @deprecated use of get_magic_quotes_gpc is deprecated 
+     */
     function fix_input_quotes()
     {
-        if (get_magic_quotes_gpc()) {
-            array_stripslashes($_GET);
-            array_stripslashes($_POST);
-            array_stripslashes($_COOKIE);
-        }
+//        if (get_magic_quotes_gpc()) {
+//            array_stripslashes($_GET);
+//            array_stripslashes($_POST);
+//            array_stripslashes($_COOKIE);
+//        }
     }
 }
 
