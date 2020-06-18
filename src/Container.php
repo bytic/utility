@@ -41,7 +41,7 @@ class Container
     /**
      * @param null $make
      * @param array $parameters
-     * @return false|ContainerInterface
+     * @return mixed
      */
     public static function get($make = null, $parameters = [])
     {
