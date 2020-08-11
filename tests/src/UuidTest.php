@@ -3,6 +3,7 @@
 namespace Nip\Utility\Tests;
 
 use Nip\Utility\Uuid;
+use Ramsey\Uuid\Rfc4122\UuidInterface;
 
 /**
  * Class UuidTest
@@ -37,6 +38,17 @@ class UuidTest extends AbstractTest
     public function test_isValid_invalidList($uuid)
     {
         static::assertFalse(Uuid::isValid($uuid));
+    }
+
+    /**
+     * @dataProvider validUuidList
+     * @param $uuid
+     */
+    public function test_fromString($string)
+    {
+        $uuid = Uuid::fromString($string);
+        static::assertInstanceOf(UuidInterface::class, $uuid);
+        self::assertStringContainsStringIgnoringCase($uuid->toString(), $string);
     }
 
     /**

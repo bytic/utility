@@ -54,18 +54,18 @@ class Uuid
      * @param $uuid
      * @return mixed
      */
-    public function fromString($uuid)
+    public static function fromString($uuid)
     {
-        return Uuid::fromString($uuid);
+        return RamseyUuid::fromString($uuid);
     }
 
     /**
      * @param $uuid
      * @return mixed
      */
-    public function fromBinary($uuid)
+    public static function fromBytes($uuid)
     {
-        return Uuid::fromBinary($uuid);
+        return RamseyUuid::fromBytes($uuid);
     }
 
     /**
