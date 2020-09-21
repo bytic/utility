@@ -8,12 +8,13 @@ namespace Nip\Utility\Time;
  */
 class Duration
 {
-    protected $_value = null;
-    protected $_parts = null;
-    protected $_seconds = null;
+    protected $value = null;
+    protected $parts = null;
+    protected $seconds = null;
 
     /**
      * Duration constructor.
+     *
      * @param $duration
      */
     public function __construct($duration)
@@ -27,13 +28,12 @@ class Duration
         }
     }
 
-
     /**
      * @param null $value
      */
     public function setValue($value)
     {
-        $this->_value = $value;
+        $this->value = $value;
     }
 
     public function parseSeconds()
@@ -48,13 +48,16 @@ class Duration
         }
     }
 
+    /**
+     * @return []
+     */
     public function getParts()
     {
-        if ($this->_parts === null) {
+        if ($this->parts === null) {
             $this->parseParts();
         }
 
-        return $this->_parts;
+        return $this->parts;
     }
 
     /**
@@ -62,33 +65,39 @@ class Duration
      */
     public function setParts($parts)
     {
-        $this->_parts = $parts;
+        $this->parts = $parts;
     }
 
     public function parseParts()
     {
-        if ($this->_value && substr_count($this->_value, ':') == 2) {
+        $this->parts = [];
+        if ($this->value && substr_count($this->value, ':') == 2) {
             $this->parsePartsFromString();
-        } elseif ($this->_seconds > 0) {
+
+            return;
+        }
+        if ($this->seconds > 0) {
             $this->parsePartsFromSeconds();
+
+            return;
         }
     }
 
     public function parsePartsFromString()
     {
-        list($h, $m, $s) = explode(':', $this->_value);
+        list($hours, $minutes, $seconds) = explode(':', $this->value);
 
-        $this->setHoursPart($h);
-        $this->setMinutesPart($m);
-        $this->setSecondsPart($s);
+        $this->setHoursPart($hours);
+        $this->setMinutesPart($minutes);
+        $this->setSecondsPart($seconds);
     }
 
     /**
-     * @param string $v
+     * @param   string  $value
      */
-    public function setHoursPart($v)
+    public function setHoursPart($value)
     {
-        $this->setPart('h', $v);
+        $this->setPart('h', $value);
     }
 
     /**
@@ -97,7 +106,7 @@ class Duration
      */
     public function setPart($p, $v)
     {
-        $this->_parts[$p] = $v;
+        $this->parts[$p] = $v;
     }
 
     /**
@@ -151,11 +160,11 @@ class Duration
      */
     public function getSeconds()
     {
-        if ($this->_seconds === null) {
+        if ($this->seconds === null) {
             $this->parseSeconds();
         }
 
-        return $this->_seconds;
+        return $this->seconds;
     }
 
     /**
@@ -163,7 +172,7 @@ class Duration
      */
     public function setSeconds($seconds)
     {
-        $this->_seconds = $seconds;
+        $this->seconds = $seconds;
     }
 
     /**
@@ -175,15 +184,15 @@ class Duration
     }
 
     /**
-     * @param string $p
+     * @param   string  $part
      */
-    public function getPart($p)
+    public function getPart($part)
     {
-        if ($this->_parts === null) {
+        if ($this->parts === null) {
             $this->parseParts();
         }
 
-        return $this->_parts[$p];
+        return $this->parts[$part];
     }
 
     /**

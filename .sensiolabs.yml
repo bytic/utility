@@ -1,8 +1,11 @@
 # Configure the PHP version SensioLabsInsight should use to analyze
 # your project. It can be defined to 5, 7.0, or 7.1. If not
 # present, it will prefer 7.1 but fallback to 5 if errored.
-php_version: 7.1
+php_version: 7.2
 
+# Configure the directories excluded from the analysis. By default,
+# this setting excldues directories commonly used to store tests
+# and third-party libraries.
 global_exclude_dirs:
     - .idea
     - vendors

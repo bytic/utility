@@ -3,7 +3,7 @@
 namespace Nip\Utility\Tests;
 
 use Nip\Utility\Uuid;
-use Ramsey\Uuid\Rfc4122\UuidInterface;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * Class UuidTest
@@ -51,7 +51,7 @@ class UuidTest extends AbstractTest
     }
 
     /**
-     * @return \string[][]
+     * @return \string[][]LazyUuidFromString
      */
     public function validUuidList()
     {
