@@ -3,6 +3,7 @@
 namespace Nip\Utility;
 
 use ArrayAccess;
+use InvalidArgumentException;
 
 /**
  * Class Arr
@@ -357,11 +358,12 @@ class Arr
     /**
      * Get one or a specified number of random values from an array.
      *
-     * @param array $array
-     * @param int|null $number
+     * @param   array     $array
+     * @param   int|null  $number
+     *
      * @return mixed
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function random($array, $number = null)
     {
