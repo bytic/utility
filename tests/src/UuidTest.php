@@ -11,7 +11,6 @@ use Ramsey\Uuid\Rfc4122\UuidInterface;
  */
 class UuidTest extends AbstractTest
 {
-
     public function test_uuid()
     {
         $uuid = Uuid::uuid();

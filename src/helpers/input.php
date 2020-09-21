@@ -2,7 +2,7 @@
 
 if (!function_exists('fix_input_quotes')) {
     /**
-     * @deprecated use of get_magic_quotes_gpc is deprecated 
+     * @deprecated use of get_magic_quotes_gpc is deprecated
      */
     function fix_input_quotes()
     {

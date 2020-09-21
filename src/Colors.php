@@ -121,13 +121,13 @@ class Colors
             }
 
             $ndf1 = pow($red - $colors[$index][2], 2) + pow(
-                    $green - $colors[$index][3],
-                    2
-                ) + pow($blue - $colors[$index][4], 2);
+                $green - $colors[$index][3],
+                2
+            ) + pow($blue - $colors[$index][4], 2);
             $ndf2 = abs(pow($h - $colors[$index][5], 2)) + pow(
-                    $s - $colors[$index][6],
-                    2
-                ) + abs(pow($l - $colors[$index][7], 2));
+                $s - $colors[$index][6],
+                2
+            ) + abs(pow($l - $colors[$index][7], 2));
 
             $ndf = $ndf1 + $ndf2 * 2;
             if ($df < 0 || $df > $ndf) {
@@ -167,5 +167,4 @@ class Colors
             return ($lightness2 + 0.05) / ($lightness1 + 0.05);
         }
     }
-
 }
