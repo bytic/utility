@@ -34,4 +34,3 @@ class DurationTest extends AbstractTest
         ];
     }
 }
-

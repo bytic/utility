@@ -1065,6 +1065,7 @@ class Str
                     return false;
                 }
             // or else fall through
+            // no break
             case 'a':
             case 'O':
                 return (bool)preg_match("/^{$token}:[0-9]+:/s", $data);
