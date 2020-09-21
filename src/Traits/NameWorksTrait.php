@@ -8,7 +8,6 @@ namespace Nip\Utility\Traits;
  */
 trait NameWorksTrait
 {
-
     /**
      * @var null|boolean
      */

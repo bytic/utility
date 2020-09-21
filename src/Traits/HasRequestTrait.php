@@ -10,7 +10,6 @@ use Nip\Request;
  */
 trait HasRequestTrait
 {
-
     /**
      * @var Request
      */

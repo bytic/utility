@@ -8,7 +8,6 @@ namespace Nip\Utility;
  */
 class Oop
 {
-
     /**
      * @param $class
      * @return string

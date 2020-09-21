@@ -8,7 +8,6 @@ namespace Nip\Utility;
  */
 class Text
 {
-
     /**
      * @param $str
      * @param array $replace
