@@ -10,7 +10,6 @@ use Ramsey\Uuid\Uuid as RamseyUuid;
  */
 class Uuid
 {
-
     /**
      * The callback that should be used to generate UUIDs.
      *

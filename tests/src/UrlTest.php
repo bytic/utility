@@ -10,7 +10,6 @@ use Nip\Utility\Url;
  */
 class UrlTest extends AbstractTest
 {
-
     /**
      * @dataProvider data_isValid()
      * @param $url

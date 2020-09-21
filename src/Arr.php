@@ -10,7 +10,6 @@ use ArrayAccess;
  */
 class Arr
 {
-
     /**
      * Determine whether the given value is array accessible.
      *
@@ -237,7 +236,7 @@ class Arr
 
         return true;
     }
-    
+
     /**
      * Filter the array using the given callback.
      *

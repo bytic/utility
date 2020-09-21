@@ -8,7 +8,6 @@ namespace Nip\Utility\Traits;
  */
 trait SingletonTrait
 {
-
     /**
      * Singleton
      *

@@ -8,7 +8,6 @@ namespace Nip\Utility;
  */
 class Str
 {
-
     /**
      * The cache of snake-cased words.
      *
