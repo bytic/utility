@@ -185,14 +185,17 @@ class Duration
 
     /**
      * @param   string  $part
+     * @param   int     $default
+     *
+     * @return int|mixed
      */
-    public function getPart($part)
+    public function getPart($part, $default = 0)
     {
         if ($this->parts === null) {
             $this->parseParts();
         }
 
-        return $this->parts[$part];
+        return isset($this->parts[$part]) ? $this->parts[$part] : $default;
     }
 
     /**
@@ -224,10 +227,10 @@ class Duration
      */
     public function getDefaultString()
     {
-        $hours = str_pad($this->getHoursPart(), 2, 0, STR_PAD_LEFT);
+        $hours   = str_pad($this->getHoursPart(), 2, 0, STR_PAD_LEFT);
         $minutes = str_pad($this->getMinutesPart(), 2, 0, STR_PAD_LEFT);
         $seconds = str_pad($this->getSecondsPart(), 2, 0, STR_PAD_LEFT);
-        $micro = str_replace('0.', '', $this->getMicroPart());
+        $micro   = str_pad(str_replace('0.', '', $this->getMicroPart()), 2, 0, STR_PAD_LEFT);
         return $hours . ':' . $minutes . ':' . $seconds . '.' . $micro;
     }
 

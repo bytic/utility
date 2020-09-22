@@ -28,6 +28,7 @@ class DurationTest extends AbstractTest
     public function dataGetDefaultString()
     {
         return [
+            [123, '00:02:03.00'],
             [123.56, '00:02:03.56'],
             [123.06, '00:02:03.06'],
             [94123.061, '26:08:43.06'],
