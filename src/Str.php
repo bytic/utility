@@ -613,7 +613,12 @@ class Str
         return $return ? $data : true;
     }
 
-    public function fromHex($hex): string
+    /**
+     * @param $hex
+     *
+     * @return string
+     */
+    public static function fromHex($hex): string
     {
         $str = '';
         for ($i=0;$i<strlen($hex);$i+=2) {
