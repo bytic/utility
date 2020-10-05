@@ -304,7 +304,10 @@ class Str
      */
     public static function plural($value, $count = 2)
     {
-        return Pluralizer::plural($value, $count);
+        if (function_exists('inflector')) {
+            return inflector()->pluralize($value);
+        }
+        throw new \Exception("Plural fuction needs bytic/inflector");
     }
 
     /**

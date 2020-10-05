@@ -5,9 +5,8 @@
 namespace Nip\Utility;
 
 use DOMDocument;
-use DOMText;
+use Exception;
 use Nip\Utility\Xml\FromArrayBuilder;
-use SebastianBergmann\CodeCoverage\XmlException;
 use SimpleXMLElement;
 
 /**
@@ -18,14 +17,18 @@ use SimpleXMLElement;
  */
 class Xml
 {
-    public static function toObject($xml): \SimpleXMLElement
+    /**
+     * @param $xml
+     *
+     * @return SimpleXMLElement
+     */
+    public static function toObject($xml): SimpleXMLElement
     {
         return simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
-        ;
     }
 
     /**
-     * @param          $input
+     * @param   array  $input
      * @param   array  $options
      *
      * @return DOMDocument|SimpleXMLElement
@@ -40,12 +43,12 @@ class Xml
      * @param $xml
      * @param $schema
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public static function validate($xml, $schema)
     {
         libxml_use_internal_errors(true);
-        $xmlDocument = new \DOMDocument();
+        $xmlDocument = new DOMDocument();
         $xmlDocument->loadXML($xml);
 
         $schema = static::prepareSchema($schema);
@@ -54,10 +57,10 @@ class Xml
             $errors = libxml_get_errors();
 
             foreach ($errors as $error) {
-                throw new \Exception(static::displayError($error));
+                throw new Exception(static::displayError($error));
             }
             libxml_clear_errors();
-            throw new \Exception('INVALID XML');
+            throw new Exception('INVALID XML');
         }
     }
 
@@ -96,8 +99,7 @@ class Xml
         if (!Url::isValid($schema)) {
             return $schema;
         }
-        $response = file_get_contents($schema);
 
-        return $response;
+        return file_get_contents($schema);
     }
 }
