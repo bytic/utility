@@ -612,4 +612,13 @@ class Str
         }
         return $return ? $data : true;
     }
+
+    public function fromHex($hex): string
+    {
+        $str = '';
+        for ($i=0;$i<strlen($hex);$i+=2) {
+            $str .= chr(hexdec(substr($hex, $i, 2)));
+        }
+        return $str;
+    }
 }
