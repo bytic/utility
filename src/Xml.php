@@ -3,12 +3,37 @@
 
 namespace Nip\Utility;
 
+use DOMDocument;
+use DOMText;
+use Nip\Utility\Xml\FromArrayBuilder;
+use SebastianBergmann\CodeCoverage\XmlException;
+use SimpleXMLElement;
+
 /**
  * Class Xml
  * @package Nip\Utility
+ *
+ * @inspiration https://github.com/cakephp/utility/blob/master/Xml.php
  */
 class Xml
 {
+    public static function toObject($xml): \SimpleXMLElement
+    {
+        return simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);;
+    }
+
+    /**
+     * @param          $input
+     * @param   array  $options
+     *
+     * @return DOMDocument|SimpleXMLElement
+     */
+    public static function fromArray($input, array $options = [])
+    {
+        return FromArrayBuilder::build($input, $options);
+    }
+
+
     /**
      * @param $xml
      * @param $schema
@@ -73,4 +98,6 @@ class Xml
 
         return $response;
     }
+
+
 }
