@@ -1,4 +1,5 @@
 <?php
+
 /** @noinspection PhpComposerExtensionStubsInspection */
 
 namespace Nip\Utility\Xml;
@@ -14,7 +15,6 @@ use SimpleXMLElement;
  */
 class FromArrayBuilder
 {
-
     protected $input;
 
     /**
