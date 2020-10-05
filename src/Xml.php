@@ -1,4 +1,5 @@
 <?php
+
 /** @noinspection PhpComposerExtensionStubsInspection */
 
 namespace Nip\Utility;
@@ -19,7 +20,8 @@ class Xml
 {
     public static function toObject($xml): \SimpleXMLElement
     {
-        return simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);;
+        return simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+        ;
     }
 
     /**
@@ -98,6 +100,4 @@ class Xml
 
         return $response;
     }
-
-
 }
