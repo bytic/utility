@@ -16,10 +16,10 @@ class Container
      * @return false|ContainerInterface|NipContainer
      * @noinspection PhpDocMissingThrowsInspection
      */
-    public static function container()
+    public static function container($reset = false)
     {
         static $instance;
-        if (!($instance instanceof ContainerInterface)) {
+        if ($reset || !($instance instanceof ContainerInterface)) {
             /** @noinspection PhpUnhandledExceptionInspection */
             $instance = static::detect();
         }

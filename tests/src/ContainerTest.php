@@ -16,4 +16,16 @@ class ContainerTest extends AbstractTest
     {
         static::assertInstanceOf(Container::class, \Nip\Utility\Container::container());
     }
+
+    public function test_container_with_reset()
+    {
+        $container = \Nip\Utility\Container::container();
+        static::assertInstanceOf(Container::class, $container);
+        self::assertSame($container, \Nip\Utility\Container::container());
+
+        Container::setInstance(new Container());
+        $container2 = \Nip\Utility\Container::container(true);
+        static::assertInstanceOf(Container::class, $container2);
+        self::assertNotSame($container, $container2);
+    }
 }

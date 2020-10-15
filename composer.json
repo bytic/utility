@@ -34,7 +34,7 @@
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-simplexml": "*",
-    "bytic/container": "^1.0",
+    "bytic/container": "^1.0|^2.0",
     "bytic/inflector": "^1.0",
     "phpunit/phpunit": "^7.2|^8.0|^9.0",
     "mockery/mockery": "^1.0"

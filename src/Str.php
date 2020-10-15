@@ -32,11 +32,12 @@ class Str
     /**
      * Return the remainder of a string after the first occurrence of a given value.
      *
-     * @param string $subject
-     * @param string $search
+     * @param   string  $subject
+     * @param   string  $search
+     *
      * @return string
      */
-    public static function after($subject, $search)
+    public static function after(string $subject, string $search): string
     {
         return $search === '' ? $subject : array_reverse(explode($search, $subject, 2))[0];
     }
@@ -298,11 +299,12 @@ class Str
     /**
      * Get the plural form of an English word.
      *
-     * @param string $value
-     * @param int $count
+     * @param   string  $value
+     * @param   int     $count
+     *
      * @return string
      */
-    public static function plural($value, $count = 2)
+    public static function plural(string $value, $count = 2): string
     {
         if (function_exists('inflector')) {
             return inflector()->pluralize($value);
@@ -317,14 +319,15 @@ class Str
      * @return string
      * @throws \Exception
      */
-    public static function random($length = 16)
+    public static function random($length = 16): string
     {
         $string = '';
         while (($len = strlen($string)) < $length) {
-            $size = $length - $len;
-            $bytes = random_bytes($size);
+            $size   = $length - $len;
+            $bytes  = random_bytes($size);
             $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
         }
+
         return $string;
     }
 

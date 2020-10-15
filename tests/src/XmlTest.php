@@ -20,6 +20,13 @@ class XmlTest extends AbstractTest
         );
     }
 
+    public function test_toObject()
+    {
+        $xml = file_get_contents(TEST_FIXTURE_PATH . '/Xml/request.xml');
+        $object = Xml::toObject($xml);
+        self::assertInstanceOf(\SimpleXMLElement::class, $object);
+    }
+
     public function test_fromArray()
     {
         $object = Xml::fromArray(['myKey' => ['myAtrr' => 5, 'myAttr2' => 'My Value']]);
