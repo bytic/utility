@@ -37,19 +37,6 @@ if (!function_exists('env')) {
     }
 }
 
-if (!function_exists('value')) {
-    /**
-     * Return the default value of the given value.
-     *
-     * @param mixed $value
-     * @return mixed
-     */
-    function value($value)
-    {
-        return $value instanceof Closure ? $value() : $value;
-    }
-}
-
 if (! function_exists('data_get')) {
     /**
      * Get an item from an array or object using "dot" notation.
@@ -88,5 +75,43 @@ if (! function_exists('data_get')) {
             }
         }
         return $target;
+    }
+}
+if (! function_exists('head')) {
+    /**
+     * Get the first element of an array. Useful for method chaining.
+     *
+     * @param  array  $array
+     * @return mixed
+     */
+    function head($array)
+    {
+        return reset($array);
+    }
+}
+
+if (! function_exists('last')) {
+    /**
+     * Get the last element from an array.
+     *
+     * @param  array  $array
+     * @return mixed
+     */
+    function last($array)
+    {
+        return end($array);
+    }
+}
+
+if (!function_exists('value')) {
+    /**
+     * Return the default value of the given value.
+     *
+     * @param mixed $value
+     * @return mixed
+     */
+    function value($value)
+    {
+        return $value instanceof Closure ? $value() : $value;
     }
 }
