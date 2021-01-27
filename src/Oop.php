@@ -19,6 +19,12 @@ class Oop
         return basename(str_replace('\\', '/', $class));
     }
 
+    public static function classUsesTrait($class, $trait): bool
+    {
+        $traits = static::uses($class);
+        return isset($traits[$trait]);
+    }
+
     /**
      * @param $class
      * @param bool $recursive

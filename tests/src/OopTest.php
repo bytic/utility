@@ -4,6 +4,8 @@ namespace Nip\Utility\Tests;
 
 use Nip\Utility\Oop;
 use Nip\Utility\Tests\Fixtures\ExtendedClass;
+use Nip\Utility\Traits\HasRequestTrait;
+use Nip\Utility\Traits\SingletonTrait;
 
 /**
  * Class OopTest
@@ -15,6 +17,12 @@ class OopTest extends AbstractTest
     {
         $name = Oop::basename(ExtendedClass::class);
         self::assertSame('ExtendedClass', $name);
+    }
+
+    public function test_classUsesTrait()
+    {
+        self::assertTrue(Oop::classUsesTrait(ExtendedClass::class, \Nip\Utility\Traits\NameWorksTrait::class));
+        self::assertFalse(Oop::classUsesTrait(ExtendedClass::class, HasRequestTrait::class));
     }
 
     public function test_uses()
