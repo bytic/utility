@@ -5,7 +5,6 @@ namespace Nip\Utility\Tests;
 use Nip\Utility\Oop;
 use Nip\Utility\Tests\Fixtures\ExtendedClass;
 use Nip\Utility\Traits\HasRequestTrait;
-use Nip\Utility\Traits\SingletonTrait;
 
 /**
  * Class OopTest
@@ -30,10 +29,12 @@ class OopTest extends AbstractTest
         $traits = Oop::uses(ExtendedClass::class);
         self::assertSame(
             [
-                'Nip\Utility\Traits\NameWorksTrait' => 'Nip\Utility\Traits\NameWorksTrait',
-                'Nip\Utility\Traits\SingletonTrait' => 'Nip\Utility\Traits\SingletonTrait',
+                'Nip\Utility\Traits\NameWorksTrait'               => 'Nip\Utility\Traits\NameWorksTrait',
+                'Nip\Utility\Traits\CanBootTraitsTrait'           => 'Nip\Utility\Traits\CanBootTraitsTrait',
+                'Nip\Utility\Tests\Fixtures\Traits\BootableTrait' => 'Nip\Utility\Tests\Fixtures\Traits\BootableTrait',
+                'Nip\Utility\Traits\SingletonTrait'               => 'Nip\Utility\Traits\SingletonTrait',
                 'Nip\Utility\Tests\Fixtures\Traits\ExtendedTrait' => 'Nip\Utility\Tests\Fixtures\Traits\ExtendedTrait',
-                'Nip\Utility\Traits\DynamicPropertiesTrait' => 'Nip\Utility\Traits\DynamicPropertiesTrait'
+                'Nip\Utility\Traits\DynamicPropertiesTrait'       => 'Nip\Utility\Traits\DynamicPropertiesTrait'
             ],
             $traits
         );

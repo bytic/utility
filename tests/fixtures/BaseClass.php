@@ -2,6 +2,7 @@
 
 namespace Nip\Utility\Tests\Fixtures;
 
+use Nip\Utility\Traits\CanBootTraitsTrait;
 use Nip\Utility\Traits\NameWorksTrait;
 
 /**
@@ -11,4 +12,6 @@ use Nip\Utility\Traits\NameWorksTrait;
 class BaseClass
 {
     use NameWorksTrait;
+    use CanBootTraitsTrait;
+    use Traits\BootableTrait;
 }
