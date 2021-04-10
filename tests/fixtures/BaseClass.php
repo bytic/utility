@@ -14,4 +14,9 @@ class BaseClass
     use NameWorksTrait;
     use CanBootTraitsTrait;
     use Traits\BootableTrait;
+
+    public function toArray(): array
+    {
+        return [];
+    }
 }
