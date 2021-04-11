@@ -42,7 +42,7 @@ if (! function_exists('data_get')) {
      * Get an item from an array or object using "dot" notation.
      *
      * @param  mixed   $target
-     * @param  string|array|int  $key
+     * @param  string|array|int|callable  $key
      * @param  mixed   $default
      * @return mixed
      */
@@ -51,6 +51,11 @@ if (! function_exists('data_get')) {
         if (is_null($key)) {
             return $target;
         }
+
+        if (is_callable($key)) {
+            return call_user_func($key, $target);
+        }
+
         $key = is_array($key) ? $key : explode('.', $key);
 
         while (! is_null($segment = array_shift($key))) {
@@ -68,8 +73,12 @@ if (! function_exists('data_get')) {
             }
             if (Arr::accessible($target) && Arr::exists($target, $segment)) {
                 $target = $target[$segment];
-            } elseif (is_object($target) && isset($target->{$segment})) {
-                $target = $target->{$segment};
+            } elseif (is_object($target)) {
+                if (isset($target->{$segment})) {
+                    $target = $target->{$segment};
+                } elseif (method_exists($target, $segment)) {
+                    $target = $target->{$segment}();
+                }
             } else {
                 return value($default);
             }
