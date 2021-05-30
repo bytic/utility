@@ -11,6 +11,7 @@ use PHPUnit\Framework\Exception;
  *
  * @inspiration https://github.com/yiisoft/yii2/blob/ff0760142d768b03e192098d94a3c0edc2710990/framework/helpers/BaseJson.php
  * @inspiration https://github.com/ARCANEDEV/JSON
+ * @inspiration https://github.com/nette/utils/blob/master/src/Utils/Json.php
  */
 class Json
 {
@@ -46,7 +47,7 @@ class Json
      * @return string the encoding result.
      * @throws InvalidArgumentException if there is any encoding error.
      */
-    public static function encode($value, $options = 320)
+    public static function encode($value, int $options = 320)
     {
         $expressions = [];
         $value = static::processData($value, $expressions, uniqid('', true));

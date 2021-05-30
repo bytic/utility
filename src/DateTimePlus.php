@@ -2,13 +2,13 @@
 
 namespace Nip\Utility;
 
-use DateTime;
-use InvalidArgumentException;
 use Carbon\Carbon as BaseCarbon;
 
 /**
  * Class DateTimePlus
- * @package Nip\Utility
+ * @package    Nip\Utility
+ *
+ * @deprecated use \Nip\Utility\Date
  */
 class DateTimePlus extends BaseCarbon
 {
