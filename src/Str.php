@@ -620,6 +620,17 @@ class Str
     }
 
     /**
+     * Determine if the given value is a standard date format.
+     *
+     * @param  string  $value
+     * @return bool
+     */
+    public static function isStandardDateFormat($value)
+    {
+        return preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $value);
+    }
+
+    /**
      * @param $hex
      *
      * @return string
