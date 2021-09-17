@@ -12,6 +12,7 @@ class Duration
     protected $parts = null;
     protected $seconds = null;
 
+
     /**
      * Duration constructor.
      *
