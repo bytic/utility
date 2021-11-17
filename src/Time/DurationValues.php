@@ -2,6 +2,10 @@
 
 namespace Nip\Utility\Time;
 
+/**
+ * Class DurationValues
+ * @package Nip\Utility\Time
+ */
 class DurationValues
 {
 
@@ -29,6 +33,7 @@ class DurationValues
     public const SECONDS_PER_HOUR = 3600;
     public const SECONDS_PER_3_HOURS = 10800;
     public const SECONDS_PER_6_HOURS = 21600;
+    public const SECONDS_PER_DAY = 86400;
 
     public const MILLISECONDS_PER_SECOND = 1000;
     public const MICROSECONDS_PER_MILLISECOND = 1000;
