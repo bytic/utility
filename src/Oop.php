@@ -2,6 +2,8 @@
 
 namespace Nip\Utility;
 
+use Nip\Utility\Oop\ClassFileLocator;
+
 /**
  * Class Oop
  * @package Nip\Utility
@@ -70,5 +72,15 @@ class Oop
     public static function isTrait($name)
     {
         return trait_exists($name);
+    }
+
+    /**
+     * @param   \SplFileInfo  $file
+     *
+     * @return array
+     */
+    public static function classesInFile(\SplFileInfo $file)
+    {
+        return ClassFileLocator::classes($file);
     }
 }

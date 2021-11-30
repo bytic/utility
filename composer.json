@@ -40,13 +40,12 @@
     "ext-mbstring": "*",
     "ext-simplexml": "*",
     "bytic/container": "^2.0",
-    "bytic/collections": "^1.0",
     "bytic/inflector": "^1.0",
     "bytic/phpqatools": "^1.0",
     "mockery/mockery": "^1.0"
   },
   "replace": {
-    "bytic/utility": "self.version"
+    "bytic/utility": "*"
   },
   "scripts": {
     "tests": [

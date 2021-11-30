@@ -3,8 +3,10 @@
 namespace Nip\Utility\Tests;
 
 use Nip\Utility\Oop;
+use Nip\Utility\Tests\Fixtures\BaseClass;
 use Nip\Utility\Tests\Fixtures\ExtendedClass;
 use Nip\Utility\Traits\HasRequestTrait;
+use SplFileInfo;
 
 /**
  * Class OopTest
@@ -38,5 +40,11 @@ class OopTest extends AbstractTest
             ],
             $traits
         );
+    }
+
+    public function test_classesInFile()
+    {
+        $info = new SplFileInfo(TEST_FIXTURE_PATH . '/BaseClass.php');
+        self::assertSame([BaseClass::class], Oop::classesInFile($info));
     }
 }
