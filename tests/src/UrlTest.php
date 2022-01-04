@@ -3,6 +3,7 @@
 namespace Nip\Utility\Tests;
 
 use Nip\Utility\Url;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class StrTest
@@ -10,6 +11,32 @@ use Nip\Utility\Url;
  */
 class UrlTest extends AbstractTest
 {
+
+    public function test_copyQuery()
+    {
+        self::assertSame(
+            'http://test.com/app/admin/users?user=5',
+            Url::copyQuery('http://test.com/app/admin/users?user=5', ['user'], Request::create('/test/test?user=test'))
+        );
+
+        self::assertSame(
+            'http://test.com/app/admin/users?user=5&_format=json',
+            Url::copyQuery(
+                'http://test.com/app/admin/users?user=5',
+                ['user', '_format'],
+                Request::create('/test/test?user=test&_format=json')
+            )
+        );
+
+        self::assertSame(
+            'http://test.com/app/admin/users?user=5&_format=json&dnx',
+            Url::copyQuery(
+                'http://test.com/app/admin/users?user=5',
+                ['user', '_format', 'dnx'],
+                Request::create('/test/test?user=test&_format=json')
+            )
+        );
+    }
 
     public function test_addArg()
     {

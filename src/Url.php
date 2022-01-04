@@ -23,17 +23,17 @@ class Url
      *
      * @see http://us2.php.net/manual/en/http.constants.php#http.constants.url
      */
-    const URL_REPLACE = 1;
-    const URL_JOIN_PATH = 2;
-    const URL_JOIN_QUERY = 4;
-    const URL_STRIP_USER = 8;
-    const URL_STRIP_PASS = 16;
-    const URL_STRIP_AUTH = 32;
-    const URL_STRIP_PORT = 64;
-    const URL_STRIP_PATH = 128;
-    const URL_STRIP_QUERY = 256;
-    const URL_STRIP_FRAGMENT = 512;
-    const URL_STRIP_ALL = 1024;
+    public const URL_REPLACE = 1;
+    public const URL_JOIN_PATH = 2;
+    public const URL_JOIN_QUERY = 4;
+    public const URL_STRIP_USER = 8;
+    public const URL_STRIP_PASS = 16;
+    public const URL_STRIP_AUTH = 32;
+    public const URL_STRIP_PORT = 64;
+    public const URL_STRIP_PATH = 128;
+    public const URL_STRIP_QUERY = 256;
+    public const URL_STRIP_FRAGMENT = 512;
+    public const URL_STRIP_ALL = 1024;
 
     public const PORT_HTTP = 80;
     public const PORT_HTTPS = 443;
@@ -44,6 +44,24 @@ class Url
      * @var array
      */
     protected static $allowedProtocols = ['http', 'https'];
+
+    /**
+     * @param   string  $uri
+     * @param   array   $args
+     * @param           $subject
+     *
+     * @return string
+     */
+    public static function copyQuery(string $uri, array $args, $subject)
+    {
+        $params = parse_url($uri);
+        parse_str($params['query'] ?? '', $params['query']);
+        foreach ($args as $arg) {
+            $params['query'][$arg] = isset($params['query'][$arg]) ? $params['query'][$arg] : $subject->get($arg);
+        }
+
+        return static::create($params);
+    }
 
     public static function addArg(array $newParams, ?string $uri = null): string
     {
@@ -123,10 +141,10 @@ class Url
      * RFC3986 and as a consequence non compliant to RFC3987 and as a consequence
      * not valid as a "URL" in HTML5.
      *
-     * @param array $query
+     * @param   array   $query
      *   The query parameter array to be processed,
      *   e.g. \Drupal::request()->query->all().
-     * @param string $parent
+     * @param   string  $parent
      *   Internal use only. Used to build the $query array key for nested items.
      *
      * @return string
@@ -134,7 +152,7 @@ class Url
      *   string.
      *
      * @ingroup php_wrappers
-     * @todo Remove this function once PHP 5.4 is required as we can use just
+     * @todo    Remove this function once PHP 5.4 is required as we can use just
      *   http_build_query() directly.
      *
      */
@@ -164,10 +182,12 @@ class Url
      * Reverse of the PHP built-in function parse_url
      *
      * @see http://php.net/parse_url
+     *
      * @param $url
+     *
      * @return string
      */
-    public static function build($url, $parts = [], $flags = self::URL_REPLACE, &$new_url = array())
+    public static function build($url, $parts = [], $flags = self::URL_REPLACE, &$new_url = [])
     {
         is_array($url) || $url = parse_url($url);
         is_array($parts) || $parts = parse_url($parts);
@@ -506,7 +526,8 @@ class Url
      * Callback for the preg_replace in the linkify() method.
      * Part of the LinkifyURL Project <https://github.com/jmrware/LinkifyURL>
      *
-     * @param string $text Matches from the preg_ function
+     * @param   string  $text  Matches from the preg_ function
+     *
      * @return string
      */
     protected static function linkifyRegex(string $text): string
