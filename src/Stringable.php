@@ -4,6 +4,7 @@ namespace Nip\Utility;
 
 use Closure;
 use Nip\Collections\Collection;
+use ReturnTypeWillChange;
 
 /**
  * Class Stringable
@@ -595,9 +596,9 @@ class Stringable
     /**
      * Replace the patterns matching the given regular expression.
      *
-     * @param   string           $pattern
-     * @param   \Closure|string  $replace
-     * @param   int              $limit
+     * @param   string          $pattern
+     * @param   Closure|string  $replace
+     * @param   int             $limit
      *
      * @return static
      */
@@ -850,7 +851,10 @@ class Stringable
      */
     public function wordCount()
     {
-        return str_word_count($this->value);
+        $clean = iconv('UTF-8', 'ASCII//TRANSLIT', $this->value);
+        $clean = str_replace('?', '', $clean);
+
+        return str_word_count($clean);
     }
 
     /**
@@ -882,7 +886,7 @@ class Stringable
      *
      * @return string
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->__toString();

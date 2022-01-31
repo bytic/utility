@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Utility\Tests;
 
 use Nip\Utility\Stringable;
@@ -27,7 +29,14 @@ class StringableTest extends AbstractTest
     public function testWordCount()
     {
         $this->assertEquals(2, $this->stringable('Hello, world!')->wordCount());
-        $this->assertEquals(10, $this->stringable('Hi, this is my first contribution to the Laravel framework.')->wordCount());
+        $this->assertEquals(
+            10,
+            $this->stringable('Hi, this is my first contribution to the Laravel framework.')->wordCount()
+        );
+        $this->assertEquals(
+            9,
+            $this->stringable('HOSPICE Casa Speranței oferă servicii de îngrijire paliativă copiilor')->wordCount()
+        );
     }
 
     /**

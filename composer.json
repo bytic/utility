@@ -37,6 +37,7 @@
   },
   "require-dev": {
     "ext-json": "*",
+    "ext-iconv": "*",
     "ext-mbstring": "*",
     "ext-simplexml": "*",
     "bytic/container": "^2.0",
