@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Utility\Tests\Fixtures;
 
 use Nip\Utility\Traits\CanBootTraitsTrait;
@@ -18,5 +20,25 @@ class BaseClass
     public function toArray(): array
     {
         return [];
+    }
+
+    /**
+     * @param $attribute
+     *
+     * @return mixed
+     */
+    public function methodNotTypeAttribute($attribute)
+    {
+        return $attribute;
+    }
+
+    /**
+     * @param   JsonModel  $model
+     *
+     * @return mixed
+     */
+    public function methodNameAttribute(JsonModel $model)
+    {
+        return get_class($model);
     }
 }
