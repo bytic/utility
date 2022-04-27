@@ -3,6 +3,9 @@
 namespace Nip\Utility;
 
 use Nip\Utility\Oop\ClassFileLocator;
+use ReflectionClass;
+use ReflectionException;
+use SplFileInfo;
 
 /**
  * Class Oop
@@ -12,6 +15,22 @@ class Oop
 {
     /**
      * @param $class
+     *
+     * @return string
+     * @throws ReflectionException
+     */
+    public static function namespace($class): string
+    {
+        $class = is_object($class) ? get_class($class) : $class;
+
+        $reflection_class = new ReflectionClass($class);
+
+        return $reflection_class->getNamespaceName();
+    }
+
+    /**
+     * @param $class
+     *
      * @return string
      */
     public static function basename($class)
@@ -75,11 +94,11 @@ class Oop
     }
 
     /**
-     * @param   \SplFileInfo  $file
+     * @param   SplFileInfo  $file
      *
      * @return array
      */
-    public static function classesInFile(\SplFileInfo $file)
+    public static function classesInFile(SplFileInfo $file)
     {
         return ClassFileLocator::classes($file);
     }
