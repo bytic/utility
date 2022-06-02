@@ -77,9 +77,13 @@ class Duration
 
     public function parseParts()
     {
-        $this->parts = [];
+        $this->parts = [
+            'h' => 0,
+            'm' => 0,
+            's' => 0,
+        ];
 
-        if ($this->value && substr_count((string)$this->value, ':') > 1) {
+        if ($this->value && substr_count((string)$this->value, ':') >= 1) {
             $this->parsePartsFromString();
 
             return;
