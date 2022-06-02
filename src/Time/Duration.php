@@ -271,7 +271,7 @@ class Duration
         $return  .= '<span class="separator">:</span>';
         $return  .= '<span class="seconds">' . $seconds . '</span>';
 
-        $micro  = str_replace('0.', '', $this->getMicroPart());
+        $micro  = str_replace('0.', '', (string)$this->getMicroPart());
         $return .= '<span class="micro">.' . $micro . '</span>';
 
         $return .= '</time>';
