@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Utility\Time;
 
 /**
@@ -30,7 +32,7 @@ class Duration
     }
 
     /**
-     * @param null $value
+     * @param   null|string  $value
      */
     public function setValue($value)
     {
@@ -39,14 +41,18 @@ class Duration
 
     public function parseSeconds()
     {
-        $parts = $this->getParts();
-        if (count($parts) == 3) {
-            $seconds = 0;
+        $parts   = $this->getParts();
+        $seconds = 0;
+        if ($parts['h'] > 0) {
             $seconds += $parts['h'] * 3600;
-            $seconds += $parts['m'] * 60;
-            $seconds += $parts['s'];
-            $this->setSeconds($seconds);
         }
+        if ($parts['m'] > 0) {
+            $seconds += $parts['m'] * 60;
+        }
+        if ($parts['s'] > 0) {
+            $seconds += $parts['s'];
+        }
+        $this->setSeconds($seconds);
     }
 
     /**
@@ -62,7 +68,7 @@ class Duration
     }
 
     /**
-     * @param array $parts
+     * @param   array  $parts
      */
     public function setParts($parts)
     {
@@ -72,11 +78,13 @@ class Duration
     public function parseParts()
     {
         $this->parts = [];
-        if ($this->value && substr_count($this->value, ':') == 2) {
+
+        if ($this->value && substr_count((string)$this->value, ':') > 1) {
             $this->parsePartsFromString();
 
             return;
         }
+
         if ($this->seconds > 0) {
             $this->parsePartsFromSeconds();
 
@@ -86,11 +94,11 @@ class Duration
 
     public function parsePartsFromString()
     {
-        list($hours, $minutes, $seconds) = explode(':', $this->value);
+        $parts = explode(':', (string)$this->value);
 
-        $this->setHoursPart($hours);
-        $this->setMinutesPart($minutes);
-        $this->setSecondsPart($seconds);
+        $this->setSecondsPart(array_pop($parts));
+        $this->setMinutesPart(array_pop($parts));
+        $this->setHoursPart(array_pop($parts));
     }
 
     /**
@@ -102,8 +110,8 @@ class Duration
     }
 
     /**
-     * @param string $p
-     * @param string $v
+     * @param   string  $p
+     * @param   string  $v
      */
     public function setPart($p, $v)
     {
@@ -111,7 +119,7 @@ class Duration
     }
 
     /**
-     * @param string $v
+     * @param   string  $v
      */
     public function setMinutesPart($v)
     {
@@ -119,7 +127,7 @@ class Duration
     }
 
     /**
-     * @param string $v
+     * @param   string  $v
      */
     public function setSecondsPart($v)
     {
@@ -169,7 +177,7 @@ class Duration
     }
 
     /**
-     * @param null $seconds
+     * @param   null|int  $seconds
      */
     public function setSeconds($seconds)
     {
@@ -196,7 +204,7 @@ class Duration
             $this->parseParts();
         }
 
-        return isset($this->parts[$part]) ? $this->parts[$part] : $default;
+        return $this->parts[$part] ?? $default;
     }
 
     /**
@@ -228,10 +236,16 @@ class Duration
      */
     public function getDefaultString()
     {
-        $hours   = str_pad($this->getHoursPart(), 2, 0, STR_PAD_LEFT);
-        $minutes = str_pad($this->getMinutesPart(), 2, 0, STR_PAD_LEFT);
-        $seconds = str_pad($this->getSecondsPart(), 2, 0, STR_PAD_LEFT);
-        $micro   = str_pad(str_replace('0.', '', $this->getMicroPart()), 2, 0, STR_PAD_LEFT);
+        $hours   = $this->formatPart($this->getHoursPart());
+        $minutes = $this->formatPart($this->getMinutesPart());
+        $seconds = $this->formatPart($this->getSecondsPart());
+        $micro   = str_pad(
+            str_replace('0.', '', (string)$this->getMicroPart()),
+            2,
+            '0',
+            STR_PAD_LEFT
+        );
+
         return $hours . ':' . $minutes . ':' . $seconds . '.' . $micro;
     }
 
@@ -242,18 +256,18 @@ class Duration
     {
         $return = '<time>';
 
-        $hours = str_pad($this->getHoursPart(), 2, 0, STR_PAD_LEFT);
+        $hours  = $this->formatPart($this->getHoursPart());
         $return .= '<span class="hour">' . $hours . '</span>';
 
-        $minutes = str_pad($this->getMinutesPart(), 2, 0, STR_PAD_LEFT);
-        $return .= '<span class="separator">:</span>';
-        $return .= '<span class="minutes">' . $minutes . '</span>';
+        $minutes = $this->formatPart($this->getMinutesPart());
+        $return  .= '<span class="separator">:</span>';
+        $return  .= '<span class="minutes">' . $minutes . '</span>';
 
-        $seconds = str_pad($this->getSecondsPart(), 2, 0, STR_PAD_LEFT);
-        $return .= '<span class="separator">:</span>';
-        $return .= '<span class="seconds">' . $seconds . '</span>';
+        $seconds = $this->formatPart($this->getSecondsPart());
+        $return  .= '<span class="separator">:</span>';
+        $return  .= '<span class="seconds">' . $seconds . '</span>';
 
-        $micro = str_replace('0.', '', $this->getMicroPart());
+        $micro  = str_replace('0.', '', $this->getMicroPart());
         $return .= '<span class="micro">.' . $micro . '</span>';
 
         $return .= '</time>';
@@ -270,19 +284,29 @@ class Duration
 
         $hours = $this->getHoursPart();
         if ($hours or $return) {
-            $return .= ($return ? ' ' : '') . str_pad($hours, 2, 0, STR_PAD_LEFT) . 'h';
+            $return .= ($return ? ' ' : '') . $this->formatPart($hours) . 'h';
         }
 
         $minutes = $this->getMinutesPart();
         if ($minutes or $return) {
-            $return .= ($return ? ' ' : '') . str_pad($minutes, 2, 0, STR_PAD_LEFT) . 'm';
+            $return .= ($return ? ' ' : '') . $this->formatPart($minutes) . 'm';
         }
 
         $seconds = $this->getSecondsPart();
         if ($seconds) {
-            $return .= ($return ? ' ' : '') . str_pad($seconds, 2, 0, STR_PAD_LEFT) . 's';
+            $return .= ($return ? ' ' : '') . $this->formatPart($seconds) . 's';
         }
 
         return $return;
+    }
+
+    /**
+     * @param $value
+     *
+     * @return string
+     */
+    protected function formatPart($value): string
+    {
+        return str_pad((string)$value, 2, '0', STR_PAD_LEFT);
     }
 }
