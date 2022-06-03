@@ -23,6 +23,7 @@ class Duration
     public function __construct($duration)
     {
         if (is_numeric($duration)) {
+            $duration = floatval($duration);
             $this->setSeconds($duration);
         }
         if (is_string($duration)) {
@@ -192,7 +193,7 @@ class Duration
     /**
      * @param   null|int  $seconds
      */
-    public function setSeconds($seconds)
+    public function setSeconds(float $seconds)
     {
         $this->seconds = $seconds;
     }
