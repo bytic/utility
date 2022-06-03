@@ -100,7 +100,15 @@ class Duration
     {
         $parts = explode(':', (string)$this->value);
 
-        $this->setSecondsPart(array_pop($parts));
+        $seconds      = floatval(array_pop($parts));
+        $seconds      = round($seconds, 2);
+        $wholeSeconds = intval($seconds);
+        $this->setSecondsPart($wholeSeconds);
+
+        $micro = round($seconds - $wholeSeconds, 2);
+
+        $this->setMicroPart($micro);
+        $this->setSecondsPart($wholeSeconds);
         $this->setMinutesPart(array_pop($parts));
         $this->setHoursPart(array_pop($parts));
     }
@@ -149,22 +157,23 @@ class Duration
     public function parsePartsFromSeconds()
     {
         $seconds = $this->getSeconds();
-        if ($hours = intval((floor($seconds / 3600)))) {
+        $hours   = intval((floor($seconds / 3600)));
+        if ($hours) {
             $seconds = $seconds - $hours * 3600;
         }
-
         $this->setHoursPart($hours);
 
-        if ($minutes = intval((floor($seconds / 60)))) {
+        $minutes = intval((floor($seconds / 60)));
+        if ($minutes) {
             $seconds = $seconds - $minutes * 60;
         }
-
         $this->setMinutesPart($minutes);
 
-        $seconds = round($seconds, 2);
-        $this->setSecondsPart(intval($seconds));
+        $seconds      = round($seconds, 2);
+        $wholeSeconds = intval($seconds);
+        $this->setSecondsPart($wholeSeconds);
 
-        $micro = round($seconds - intval($seconds), 2);
+        $micro = round($seconds - $wholeSeconds, 2);
         $this->setMicroPart($micro);
     }
 
