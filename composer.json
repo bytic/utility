@@ -45,20 +45,5 @@
     "bytic/contracts": "^1.0",
     "bytic/phpqatools": "^1.0",
     "symfony/http-foundation": "^4.0|^5.0|^6.0"
-  },
-  "scripts": {
-    "tests": [
-      "@analyse",
-      "@test"
-    ],
-    "test": [
-      "phpunit"
-    ],
-    "analyse": [
-      "@stan",
-      "@psalm"
-    ],
-    "stan": "phpstan analyse",
-    "psalm": "psalm --output-format=compact --find-dead-code --find-unused-psalm-suppress --long-progress "
   }
 }

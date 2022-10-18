@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Utility;
 
 use Nip\Utility\Oop\ClassFileLocator;
@@ -40,15 +42,22 @@ class Oop
         return basename(str_replace('\\', '/', $class));
     }
 
+    /**
+     * @param $class
+     * @param $trait
+     *
+     * @return bool
+     */
     public static function classUsesTrait($class, $trait): bool
     {
         $traits = static::uses($class);
+
         return isset($traits[$trait]);
     }
 
     /**
-     * @param $class
-     * @param bool $recursive
+     * @param         $class
+     * @param   bool  $recursive
      * @return array
      */
     public static function uses($class, $recursive = true)
@@ -61,7 +70,9 @@ class Oop
         }
         $results = [];
 
-        foreach (array_reverse(class_parents($class)) + [$class => $class] as $class) {
+        $classParents = class_parents($class);
+        $classParents = is_array($classParents) ? array_reverse($classParents) : [];
+        foreach ($classParents + [$class => $class] as $class) {
             $results += static::traitUses($class);
         }
 
