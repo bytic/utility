@@ -455,6 +455,13 @@ class Url
         }
     }
 
+    public static function getHostPart($url)
+    {
+        $host = parse_url($url, PHP_URL_HOST);
+
+        return $host;
+    }
+
     /**
      * Is absolute url
      *
