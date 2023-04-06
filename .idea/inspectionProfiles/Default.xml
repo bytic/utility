@@ -153,7 +153,6 @@
     <inspection_tool class="PhpVariableVariableInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="PlatformDetectionJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ProblematicWhitespace" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="PsalmGlobal" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="QuirksModeInspectionTool" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="IE50" value="false" />
       <option name="IE55" value="false" />
