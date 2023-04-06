@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Utility;
 
+use Exception;
 use Nip\Collections\Collection;
 use voku\helper\ASCII;
 
@@ -48,8 +51,9 @@ class Str
     /**
      * Return the remainder of a string after the last occurrence of a given value.
      *
-     * @param string $subject
-     * @param string $search
+     * @param   string  $subject
+     * @param   string  $search
+     *
      * @return string
      */
     public static function afterLast($subject, $search)
@@ -71,8 +75,9 @@ class Str
     /**
      * Get the portion of a string before the first occurrence of a given value.
      *
-     * @param string $subject
-     * @param string $search
+     * @param   string  $subject
+     * @param   string  $search
+     *
      * @return string
      */
     public static function before($subject, $search)
@@ -83,8 +88,9 @@ class Str
     /**
      * Get the portion of a string before the last occurrence of a given value.
      *
-     * @param string $subject
-     * @param string $search
+     * @param   string  $subject
+     * @param   string  $search
+     *
      * @return string
      */
     public static function beforeLast($subject, $search)
@@ -105,7 +111,8 @@ class Str
     /**
      * Convert a value to camel case.
      *
-     * @param string $value
+     * @param   string  $value
+     *
      * @return string
      */
     public static function camel($value)
@@ -120,7 +127,8 @@ class Str
     /**
      * Convert a value to studly caps case.
      *
-     * @param string $value
+     * @param   string  $value
+     *
      * @return string
      */
     public static function studly($value)
@@ -137,8 +145,9 @@ class Str
     /**
      * Determine if a given string ends with a given substring.
      *
-     * @param string $haystack
-     * @param string|array $needles
+     * @param   string        $haystack
+     * @param   string|array  $needles
+     *
      * @return bool
      */
     public static function endsWith($haystack, $needles)
@@ -155,8 +164,9 @@ class Str
     /**
      * Cap a string with a single instance of a given value.
      *
-     * @param string  $value
-     * @param string  $cap
+     * @param   string  $value
+     * @param   string  $cap
+     *
      * @return string
      */
     public static function finish($value, $cap)
@@ -214,6 +224,7 @@ class Str
      * Determine if a given string is 7 bit ASCII.
      *
      * @param   string  $value
+     *
      * @return bool
      */
     public static function isAscii($value): bool
@@ -225,6 +236,7 @@ class Str
      * Determine if a given string is a valid UUID.
      *
      * @param   string  $value
+     *
      * @return bool
      */
     public static function isUuid($value): bool
@@ -251,8 +263,9 @@ class Str
     /**
      * Convert a string to snake case.
      *
-     * @param string  $value
-     * @param string  $delimiter
+     * @param   string  $value
+     * @param   string  $delimiter
+     *
      * @return string
      */
     public static function snake($value, $delimiter = '_')
@@ -272,7 +285,8 @@ class Str
     /**
      * Convert the given string to lower-case.
      *
-     * @param string $value
+     * @param   string  $value
+     *
      * @return string
      */
     public static function lower($value)
@@ -283,9 +297,10 @@ class Str
     /**
      * Limit the number of characters in a string.
      *
-     * @param string $value
-     * @param int $limit
-     * @param string $end
+     * @param   string  $value
+     * @param   int     $limit
+     * @param   string  $end
+     *
      * @return string
      */
     public static function limit($value, $limit = 100, $end = '...')
@@ -301,9 +316,10 @@ class Str
     /**
      * Limit the number of words in a string.
      *
-     * @param string $value
-     * @param int $words
-     * @param string $end
+     * @param   string  $value
+     * @param   int     $words
+     * @param   string  $end
+     *
      * @return string
      */
     public static function words($value, $words = 100, $end = '...')
@@ -319,7 +335,8 @@ class Str
     /**
      * Return the length of the given string.
      *
-     * @param string $value
+     * @param   string  $value
+     *
      * @return int
      */
     public static function length($value)
@@ -330,8 +347,9 @@ class Str
     /**
      * Parse a Class(at)method style callback into class and method.
      *
-     * @param string $callback
-     * @param string|null $default
+     * @param   string       $callback
+     * @param   string|null  $default
+     *
      * @return array
      */
     public static function parseCallback($callback, $default = null)
@@ -344,6 +362,7 @@ class Str
      *
      * @param   string        $haystack
      * @param   string|array  $needles
+     *
      * @return bool
      */
     public static function contains($haystack, $needles)
@@ -383,14 +402,14 @@ class Str
      * @param   int     $count
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public static function plural(string $value, $count = 2): string
     {
         if (function_exists('inflector')) {
             return inflector()->pluralize($value);
         }
-        throw new \Exception("Plural fuction needs bytic/inflector");
+        throw new Exception("Plural fuction needs bytic/inflector");
     }
 
     /**
@@ -416,7 +435,7 @@ class Str
      * @param   int  $length
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public static function random($length = 16): string
     {
@@ -500,6 +519,7 @@ class Str
      * @param   string  $search
      * @param   string  $replace
      * @param   string  $subject
+     *
      * @return string
      */
     public static function replaceLast($search, $replace, $subject)
@@ -581,6 +601,7 @@ class Str
      *
      * @param   string  $title
      * @param   string  $separator
+     *
      * @return string
      */
     public static function slug($title, $separator = '-')
@@ -600,13 +621,14 @@ class Str
     /**
      * Transliterate a UTF-8 value to ASCII.
      *
-     * @param  string  $value
-     * @param  string  $language
+     * @param   string  $value
+     * @param   string  $language
+     *
      * @return string
      */
     public static function ascii($value, $language = 'en')
     {
-        return ASCII::to_ascii((string) $value, $language);
+        return ASCII::to_ascii((string)$value, $language);
     }
 
     /**
@@ -631,8 +653,9 @@ class Str
     /**
      * Determine if a given string starts with a given substring.
      *
-     * @param string $haystack
-     * @param string|array $needles
+     * @param   string        $haystack
+     * @param   string|array  $needles
+     *
      * @return bool
      */
     public static function startsWith($haystack, $needles)
@@ -688,6 +711,7 @@ class Str
      * @param   string    $string
      * @param   int       $start
      * @param   int|null  $length
+     *
      * @return string
      */
     public static function substr($string, $start, $length = null)
@@ -786,6 +810,7 @@ class Str
      * @param $str
      * @param $first
      * @param $last
+     *
      * @return string
      */
     public static function mask($str, $first = 0, $last = 0)
@@ -888,6 +913,9 @@ class Str
     {
         $name     = str_replace(['-', '_'], ' ', $name);
         $split    = explode(" ", $name);
+        $split    = array_filter($split, function ($part) {
+            return !empty($part);
+        });
         $initials = [];
         foreach ($split as $part) {
             $initials[] = ucfirst($part[0]);
@@ -897,9 +925,10 @@ class Str
     }
 
     /**
-     * @param string  $string
-     * @param bool    $return
-     * @param array   $params
+     * @param   string  $string
+     * @param   bool    $return
+     * @param   array   $params
+     *
      * @return bool|mixed
      */
     public static function isJson(string $string, $return = false, ...$params)
@@ -915,7 +944,8 @@ class Str
     /**
      * Determine if the given value is a standard date format.
      *
-     * @param  string  $value
+     * @param   string  $value
+     *
      * @return bool
      */
     public static function isStandardDateFormat($value)

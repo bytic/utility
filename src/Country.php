@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Utility;
 
+use League\ISO3166\Exception\OutOfBoundsException;
 use League\ISO3166\ISO3166;
 
 /**
@@ -52,7 +55,7 @@ class Country
     {
         try {
             $data = (new ISO3166())->name($name);
-        } catch (\League\ISO3166\Exception\OutOfBoundsException $exception) {
+        } catch (OutOfBoundsException $exception) {
             $data = [];
         }
 
