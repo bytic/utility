@@ -16,8 +16,8 @@ trait SingletonTrait
     public static function instance()
     {
         static $instance;
-        if (!($instance instanceof self)) {
-            $instance = new self();
+        if (!($instance instanceof static)) {
+            $instance = new static();
         }
         return $instance;
     }
