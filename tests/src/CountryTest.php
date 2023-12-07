@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Utility\Tests;
 
 use Nip\Utility\Country;
@@ -35,5 +37,19 @@ class CountryTest extends AbstractTest
         self::assertInstanceOf(Country::class, $country);
         self::assertNull($country->name);
         self::assertNull($country->alpha3);
+    }
+
+
+    public function test_stringable()
+    {
+        $country = Country::fromName('Romania');
+        self::assertSame('Romania', (string)$country);
+    }
+
+    public function test_stringable_alpha3()
+    {
+        $country = Country::fromName('Romania');
+        $country->stringableAlpha3();
+        self::assertSame('ROU', (string)$country);
     }
 }

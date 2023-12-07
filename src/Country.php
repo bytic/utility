@@ -11,7 +11,7 @@ use League\ISO3166\ISO3166;
  * Class Country
  * @package Nip\Utility
  */
-class Country
+class Country implements \Stringable
 {
     /**
      * @var string
@@ -38,6 +38,8 @@ class Country
      */
     public $currency = null;
 
+    protected $stringable = 'name';
+
     /**
      * Country constructor.
      */
@@ -62,4 +64,46 @@ class Country
         return new self($data);
     }
 
+    /**
+     * @param $data
+     *
+     * @return self
+     */
+    public static function fromData($data): self
+    {
+        return new self($data);
+    }
+
+    public function stringableName()
+    {
+        $this->stringable = 'name';
+    }
+
+    public function stringableAlpha2()
+    {
+        $this->stringable = 'alpha2';
+    }
+
+    public function stringableAlpha3()
+    {
+        $this->stringable = 'alpha3';
+    }
+
+    /**
+     * @param $stringable
+     *
+     * @return void
+     */
+    public function stringable($stringable): void
+    {
+        $this->stringable = $stringable;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->{$this->stringable};
+    }
 }
