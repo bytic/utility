@@ -2,6 +2,7 @@
 
 namespace Nip\Utility;
 
+use Carbon\Exceptions\InvalidFormatException;
 use Closure;
 use Nip\Collections\Collection;
 use ReturnTypeWillChange;
@@ -879,6 +880,57 @@ class Stringable
         $this->dump();
 
         exit(1);
+    }
+
+    /**
+     * Get the underlying string value as an integer.
+     *
+     * @return int
+     */
+    public function toInteger()
+    {
+        return intval($this->value);
+    }
+
+    /**
+     * Get the underlying string value as a float.
+     *
+     * @return float
+     */
+    public function toFloat()
+    {
+        return floatval($this->value);
+    }
+
+    /**
+     * Get the underlying string value as a boolean.
+     *
+     * Returns true when value is "1", "true", "on", and "yes". Otherwise, returns false.
+     *
+     * @return bool
+     */
+    public function toBoolean()
+    {
+        return filter_var($this->value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Get the underlying string value as a Carbon instance.
+     *
+     * @param   string|null  $format
+     * @param   string|null  $tz
+     *
+     * @return Date
+     *
+     * @throws InvalidFormatException
+     */
+    public function toDate($format = null, $tz = null)
+    {
+        if (is_null($format)) {
+            return Date::parse($this->value, $tz);
+        }
+
+        return Date::createFromFormat($format, $this->value, $tz);
     }
 
     /**
