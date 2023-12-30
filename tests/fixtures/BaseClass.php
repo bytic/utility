@@ -17,6 +17,8 @@ class BaseClass
     use CanBootTraitsTrait;
     use Traits\BootableTrait;
 
+    public mixed $property;
+
     public function toArray(): array
     {
         return [];

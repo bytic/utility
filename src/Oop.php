@@ -7,6 +7,7 @@ namespace Nip\Utility;
 use Nip\Utility\Oop\ClassFileLocator;
 use ReflectionClass;
 use ReflectionException;
+use ReflectionProperty;
 use SplFileInfo;
 
 /**
@@ -58,6 +59,7 @@ class Oop
     /**
      * @param         $class
      * @param   bool  $recursive
+     *
      * @return array
      */
     public static function uses($class, $recursive = true)
@@ -80,8 +82,9 @@ class Oop
     }
 
     /**
-     * @param $trait
-     * @param bool $recursive
+     * @param         $trait
+     * @param   bool  $recursive
+     *
      * @return array
      */
     public static function traitUses($trait, $recursive = true)
@@ -97,6 +100,7 @@ class Oop
 
     /**
      * @param $name
+     *
      * @return bool
      */
     public static function isTrait($name)
@@ -112,5 +116,38 @@ class Oop
     public static function classesInFile(SplFileInfo $file)
     {
         return ClassFileLocator::classes($file);
+    }
+
+    /**
+     * @param $object
+     * @param $property
+     *
+     * @return bool
+     * @throws ReflectionException
+     */
+    public static function propertyIsInitialized($object, $property): bool
+    {
+        $reflection = self::reflectionProperty($object, $property);
+
+        return $reflection->isInitialized($object);
+    }
+
+    /**
+     * @param $class
+     * @param $property
+     *
+     * @return mixed|ReflectionProperty
+     * @throws ReflectionException
+     */
+    protected static function reflectionProperty($class, $property): mixed
+    {
+        static $properties = [];
+
+        $class = is_object($class) ? get_class($class) : $class;
+        if (!isset($properties[$class])) {
+            $properties[$class] = new ReflectionProperty($class, $property);
+        }
+
+        return $properties[$class];
     }
 }
