@@ -32,6 +32,19 @@ class Oop
     }
 
     /**
+     * @param   string  $namespace
+     *
+     * @return string
+     */
+    public static function namespaceBase($namespace): string
+    {
+        $parts = explode('\\', $namespace);
+        array_pop($parts);
+
+        return implode('\\', $parts);
+    }
+
+    /**
      * @param $class
      *
      * @return string
