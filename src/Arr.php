@@ -281,6 +281,27 @@ class Arr
     }
 
     /**
+     * Key an associative array by a field or using a callback.
+     *
+     * @param   array                  $array
+     * @param   callable|array|string  $keyBy
+     *
+     * @return array
+     */
+    public static function keyBy($array, $keyBy)
+    {
+        $results = [];
+
+        foreach ($array as $key => $item) {
+            $resolvedKey = $item[$keyBy];
+
+            $results[$resolvedKey] = $item;
+        }
+
+        return $results;
+    }
+
+    /**
      * Filter the array using the given callback.
      *
      * @param   array     $array
