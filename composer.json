@@ -18,6 +18,7 @@
       "legacy"
     ],
     "files": [
+      "src/helpers/datetime.php",
       "src/helpers/general.php",
       "src/helpers/input.php"
     ]
@@ -42,6 +43,7 @@
     "ext-mbstring": "*",
     "ext-simplexml": "*",
     "bytic/container": "^2.0",
+    "bytic/locale": "^1.0",
     "bytic/inflector": "^1.0",
     "bytic/contracts": "^1.0",
     "bytic/phpqatools": "^1.0",
