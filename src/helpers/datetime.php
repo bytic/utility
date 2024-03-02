@@ -1,5 +1,7 @@
 <?php
 
+use function Nip\locale;
+
 /**
  * Transforms a date's string representation into $format.
  *
@@ -10,7 +12,7 @@
  */
 function _date($datetime, $format = false)
 {
-    $format = $format ?: Nip\locale()->getOption(['time', 'dateFormat']);
+    $format = $format ?: locale()->getOption(['time', 'dateFormat']);
     $time   = is_numeric($datetime) ? $datetime : strtotime($datetime);
 
     return $time ? date($format, $time) : false;
@@ -98,7 +100,9 @@ function bytic_strftime(string $format, $timestamp = null, ?string $locale = nul
 
     $timestamp->setTimezone(new DateTimeZone(date_default_timezone_get()));
 
-    $locale = Locale::canonicalize($locale ?? setlocale(LC_TIME, '0'));
+    $locale = $locale ?? setlocale(LC_TIME, '0');
+    $locale = $locale !== 'C' ? $locale : Locale::getDefault();
+    $locale = Locale::canonicalize($locale);
 
     $intl_formats = [
         '%a' => 'ccc',    // An abbreviated textual representation of the day	Sun through Sat

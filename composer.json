@@ -43,11 +43,10 @@
     "ext-mbstring": "*",
     "ext-simplexml": "*",
     "bytic/container": "^2.0",
-    "bytic/locale": "^1.0",
     "bytic/inflector": "^1.0",
     "bytic/contracts": "^1.0",
     "bytic/phpqatools": "^1.0",
-    "symfony/http-foundation": "^4.0|^5.0|^6.0"
+    "symfony/http-foundation": "^4.0|^5.0|^6.0|^7.0"
   },
   "config": {
     "allow-plugins": {
