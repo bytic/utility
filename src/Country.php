@@ -55,6 +55,10 @@ class Country implements \Stringable
      */
     public static function fromName($name)
     {
+        if (empty($name)) {
+            return new self([]);
+        }
+
         try {
             $data = (new ISO3166())->name($name);
         } catch (OutOfBoundsException $exception) {
@@ -104,6 +108,6 @@ class Country implements \Stringable
      */
     public function __toString()
     {
-        return $this->{$this->stringable};
+        return $this->{$this->stringable} ?? '';
     }
 }

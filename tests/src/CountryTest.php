@@ -30,6 +30,18 @@ class CountryTest extends AbstractTest
         self::assertSame('ROU', $country->alpha3);
     }
 
+    public function test_empty()
+    {
+        $country = Country::fromName('');
+
+        self::assertInstanceOf(Country::class, $country);
+        self::assertNull($country->name);
+        self::assertNull($country->alpha3);
+
+        $string = (string)$country;
+        self::assertEmpty($string);
+    }
+
     public function test_fromName_dnx()
     {
         $country = Country::fromName('Rona');
