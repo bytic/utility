@@ -58,9 +58,22 @@ class Country implements \Stringable
         if (empty($name)) {
             return new self([]);
         }
+        $name = (string)$name;
+        if (strlen($name) === 2) {
+            return self::fromNameCreate($name, 'alpha2');
+        }
 
+        if (strlen($name) === 3) {
+            return self::fromNameCreate($name, 'alpha3');
+        }
+
+        return self::fromNameCreate($name);
+    }
+
+    protected static function fromNameCreate($name, $function = 'name'): Country
+    {
         try {
-            $data = (new ISO3166())->name($name);
+            $data = (new ISO3166())->$function($name);
         } catch (OutOfBoundsException $exception) {
             $data = [];
         }
