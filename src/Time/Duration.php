@@ -110,8 +110,12 @@ class Duration
 
         $this->setMicroPart($micro);
         $this->setSecondsPart($wholeSeconds);
-        $this->setMinutesPart(array_pop($parts));
-        $this->setHoursPart(array_pop($parts));
+
+        $minutes = intval(array_pop($parts));
+        $this->setMinutesPart($minutes);
+
+        $hours = intval(array_pop($parts));
+        $this->setHoursPart($hours);
     }
 
     /**
@@ -132,25 +136,25 @@ class Duration
     }
 
     /**
-     * @param   string  $v
+     * @param   int  $v
      */
-    public function setMinutesPart($v)
+    public function setMinutesPart(int $v)
     {
         $this->setPart('m', $v);
     }
 
     /**
-     * @param   string  $v
+     * @param   int  $v
      */
-    public function setSecondsPart($v)
+    public function setSecondsPart(int $v)
     {
         $this->setPart('s', $v);
     }
 
     /**
-     * @param $v
+     * @param   int  $v
      */
-    public function setMicroPart($v)
+    public function setMicroPart(float $v)
     {
         $this->setPart('ms', $v);
     }
