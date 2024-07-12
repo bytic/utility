@@ -5,6 +5,8 @@ namespace Nip\Utility\Tests;
 use Nip\Utility\Url;
 use Symfony\Component\HttpFoundation\Request;
 
+use function PHPUnit\Framework\assertSame;
+
 /**
  * Class StrTest
  * @package Nip\Utility\Tests
@@ -266,5 +268,13 @@ class UrlTest extends AbstractTest
         $expect = 'great websites: <a href="http://www.google.com?param=test">http://www.google.com?param=test</a> and <a href="http://yahoo.com/a/nested/folder">http://yahoo.com/a/nested/folder</a>';
         static::assertEquals($expect, Url::linkify($input));
         static::assertEquals($expect, Url::linkify($expect), 'linkify() tried to double linkify an href.');
+    }
+
+    public function test_getBaseHostPart()
+    {
+        assertSame('example.com', Url::getBaseHostPart('http://example.com'));
+        assertSame('example.com', Url::getBaseHostPart('http://www.example.com'));
+        assertSame('example.co.uk', Url::getBaseHostPart('http://example.co.uk'));
+        assertSame('example.co.uk', Url::getBaseHostPart('http://www.example.co.uk'));
     }
 }

@@ -21,9 +21,7 @@ class Http
 
     /**
      * Retrieve HTTPS status from $_SERVER environment variables.
-     *
      * @return bool True if the request was performed through HTTPS, false otherwise.
-     *
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
     public static function getServerHTTPS()

@@ -462,6 +462,21 @@ class Url
         return $host;
     }
 
+    public static function getBaseHostPart($url)
+    {
+        $fullhost = static::getHostPart($url);
+
+        $parts = explode(".", $fullhost);
+        $tld   = array_pop($parts);
+        $host  = array_pop($parts);
+        if (strlen($tld) == 2 && strlen($host) <= 3) {
+            $tld  = "$host.$tld";
+            $host = array_pop($parts);
+        }
+
+        return "$host.$tld";
+    }
+
     /**
      * Is absolute url
      *
