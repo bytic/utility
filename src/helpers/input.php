@@ -34,6 +34,9 @@ if (!function_exists('array_stripslashes')) {
 if (!function_exists('clean')) {
     function clean($input)
     {
+        if (null === $input) {
+            return null;
+        }
         return trim(stripslashes(htmlentities($input, ENT_QUOTES, 'UTF-8')));
     }
 }
