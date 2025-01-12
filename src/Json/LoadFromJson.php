@@ -27,6 +27,6 @@ trait LoadFromJson
      *
      * @return mixed
      */
-    abstract public function __unserialize($param);
+    abstract public function __unserialize(array $data): void;
 }
 
