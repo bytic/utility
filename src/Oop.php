@@ -103,6 +103,7 @@ class Oop
     public static function traitUses($trait, $recursive = true)
     {
         $traits = class_uses($trait);
+        $traits = is_array($traits) ? $traits : [];
 
         foreach ($traits as $trait) {
             $traits += static::traitUses($trait);
