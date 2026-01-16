@@ -533,4 +533,24 @@ class Arr
 
         return $array;
     }
+
+    /**
+     * @param   array  $array
+     * @param          $key
+     * @param   array  $newElement
+     *
+     * @return array
+     */
+    public static function insertBeforeKey(array $array, $key, array $new): array
+    {
+        $keys  = array_keys($array);
+        $index = array_search($key, $keys);
+
+        $pos = false === $index ? count($array) : $index;
+
+        $before = array_slice($array, 0, $pos);
+        $after  = array_slice($array, $pos);
+
+        return array_merge(array_slice($array, 0, $pos), $new, array_slice($array, $pos));
+    }
 }
